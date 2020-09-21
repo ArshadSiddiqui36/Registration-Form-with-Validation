@@ -1,0 +1,327 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Free Web tutorials for HTML and CSS">
+		<meta name="keywords" content="HTML, CSS, JavaScript">
+		<meta name="author" content="John Doe">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- <meta http-equiv="refresh" content="30"> --> 
+		<title>Q1. Registraton Form with full validate of external JavaScript</title>
+		<link rel="icon" href="" type="image/x-icon">
+		<link rel="stylesheet" type="text/css" href="">	<!-- Externak CSS Link -->
+		<script type="text/javascript" src="js/main.js"></script>	<!-- External JavaSceipt Link -->
+
+		<!-- --------------------------------------------------Internal CSS Start-------------------------------------------------- -->
+		<style type="text/css">
+			
+			/* .........................Important & Mandatory Properties........... */
+				*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; } /* Universal Selector (All Elements Selected) */
+				html { font-size: 62.5%; } /*  62.5% = 10px = 1rem But By Default 100% = 16px = 1rem */
+				body { font-family: Arial, sans-serif; 
+					background: url('images/wallpaperflare.png') no-repeat;
+					background-size: cover;
+					background-position: center;
+					background-attachment: fixed;
+				}
+				/* Selection Used By User To Select Content */
+				::selection {
+				background: yellow;
+				color: black;
+				outline: white;
+				cursor: pointer;
+			}
+
+			/* .........................Variable Creation Start.................... */
+				:root {
+					--width: 100vw;  	/* width: var(--width); | width: calc(var(--width) - 80vw); */
+					--height: 100vh;	/* height: var(--height); | height: calc(var(--height) - 80vh); */
+					--primary-color: #003CFF;	/* var(--primary-color); */
+					--secondary-color: #04A200;
+				}
+			/* .........................Variable Creation End...................... */
+
+
+			table {
+				width: 32%;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				padding: 2rem;
+				/* border: 1px solid black; */
+				border-radius: .5rem;
+				/* background: lightblue; */
+				background-image: linear-gradient(to bottom, rgba(0, 150, 255, .6), rgba(0, 125, 255, .9));
+				box-shadow: 0 .5rem 1rem .1rem rgba(0, 0, 0, .4);
+
+			}
+
+			h1 {	
+				text-align: center !important;
+				color: #000;
+				/* color: #f00; */
+				padding: 1rem;
+				border-bottom: 1px solid rgba(0, 0, 0, .1);
+				font-weight: normal;
+			}
+
+			input, select {
+				padding: .5rem;
+				width: 90%;
+				border: none;
+				/* box-shadow: 0 0 0 0.1rem black; */
+			}
+			input[type="radio"], input[type="checkbox"] {
+				width: auto;
+			}
+
+			input[type="submit"] {
+				color: #fff;
+				/* background: #FF5400; */
+				background-image: linear-gradient(to bottom, #FF681E, #FF5400);
+				width: 15rem;
+				height: 3.5rem;
+				border: .1rem solid #EE4E00;
+				border-radius: .4rem;
+				box-shadow: 0 .1rem .8rem .1rem rgba(0, 0, 0, .4);
+				font-size: 2rem;
+				font-weight: bold;
+				transition: .2s ease-in-out;
+			}
+
+			input[type="submit"]:hover{
+				background-image: linear-gradient(to bottom, #FF5400, #FF681E);
+				border: .1rem solid #EE4E00;
+				box-shadow: 0 0 .2rem .1rem rgba(0, 0, 0, .1);
+			}
+
+			label {
+				font-size: 1.6rem;
+			}
+
+			.leftLabel:nth-child(2) {
+				margin-right: 4rem;
+			}
+
+			td {
+				/* border: 1px solid black; */
+				text-align: center;
+				padding: 1rem 0 1rem 0;
+			}
+
+			textarea{
+				width: 95%;
+				padding: 1.5rem;
+			}
+
+			input[type="file"] {
+				width: 92%;
+				border: .1rem solid rgba(0, 0, 0, .5);
+			}
+			
+
+
+
+
+			/* ..........................Media Query Start......................... */
+				
+				/* 4K - 2560px */
+				@media (max-width: 2560px) {
+					html {
+						font-size: 62.5%;
+					}
+
+					table {
+						width: 30%;
+					}
+				}
+
+				/* Laptop L - 1440px */
+				@media (max-width: 1440px) {
+					html {
+						font-size: 62.5%;
+					}
+
+					table {
+						width: 35%;
+					}
+				}
+
+				/* Laptop 1024px */
+				@media (max-width: 1024px) {
+					html {
+						font-size: 62.5%;
+					}
+
+					table {
+						width: 55%;
+					}
+				}
+
+				/* Mini Laptop | Tablet 998px */
+				@media (max-width: 998px) {
+					html {
+						font-size: 55%;  /* 55% = 8.8px */
+					}
+
+					table {
+						width: 55%;
+					}	
+				}
+
+				/* Tablet - 768px */
+				@media (max-width: 768px) {
+					html {
+						font-size: 50%;  /* 45% = 7.2px */
+					}
+
+					table {
+						width: 60%;
+					}	
+				}
+
+				/* Mobile L - 425px */
+				@media (max-width: 425px) {
+					html {
+						font-size: 42%;
+					}	
+
+					table {
+						width: 95%;
+					}
+				}
+
+				/* Mobile M - 375px */
+				@media (max-width: 375px) {
+					html {
+						font-size: 40%;
+					}	
+
+					table {
+						width: 98%;
+					}
+				}
+
+				/* Mobile S - 320px */
+				@media (max-width: 320px) {
+					html {
+						font-size: 38.25%;
+					}
+				}
+
+			/* ..........................Media Query End........................... */
+			
+		</style>
+		<!-- --------------------------------------------------Internal CSS End---------------------------------------------------- -->
+	</head>
+
+	<body>
+
+
+		<table>
+			<form name="RegForm" action="form_submited.html" onsubmit="return validateForm()" method="post" enctype="multipart/form-data">
+
+				<tr><td colspan="2"><h1>Personal Details</h1></td></tr>
+				<tr>
+					<td><label for="name">Name</label></td>
+					<td><input type="text" name="Name" id="name" maxlength="80" placeholder="Enter your name"></td>
+				</tr><br>
+
+				<tr>
+					<td><label for="password">Password</label></td>
+					<td><input type="password" name="Password" id="password" maxlength="10" minlength="8" placeholder="Enter your password"></td>
+				</tr><br>
+
+				<tr>
+					<td><label for="email">Email</label></td>
+					<td><input type="email" name="Email" id="email" maxlength="50" placeholder="Enter your email"></td>
+				</tr><br>
+
+				<tr>
+					<td><label for="contact">Contact</label></td>
+					<td><input type="tel" name="Contact" id="contact" pattern="[789][0-9]{9}" placeholder="Enter your contact number"></td>
+				</tr><br>
+
+				<tr>
+					<td><label for="gender">Gender</label></td>
+					<td>
+					<input type="radio" name="Gender" id="male">
+				    <label for="male" class="leftLabel">Male</label>
+
+				    <input type="radio" name="Gender" id="female">
+				    <label for="female" class="leftLabel">Female</label>
+				    </td>
+				</tr><br>
+
+				<tr><td colspan="2"><h1>Educational Qualification</h1></td></tr>
+
+				<tr>
+					<td><label for="degree">Degree</label></td>
+					<td>
+						<select id="degree" name="Degree">
+						  <option value="Select-Course" selected disabled>Select your course</option>
+						  <option value="B.Tech(CSE)">B.Tech(CSE)</option>
+						  <option value="B.Tech(ECE)">B.Tech(ECE)</option>
+						  <option value="B.Tech(EEE)">B.Tech(EEE)</option>
+						  <option value="B.Tech(Mechanical)">B.Tech(Machanical)</option>
+						  <option value="B.Tech(Aeronautics)">B.Tech(Aeronautics)</option>
+						  <option value="B.Tech(Automobile)">B.Tech(Automobile)</option>
+						  <option value="B.Tech(Civil)">B.Tech(Civil)</option>
+						</select>
+					</td>
+				</tr><br>
+
+			    <tr>
+			    	<td><label for="hobbies">Hobbies</label></td>
+
+					<td>
+						<input type="checkbox" name="pchess" id="pchess">
+					    <label for="pchess" class="leftLabel">Playing Chess</label>
+
+					    <input type="checkbox" name="rbooks" id="rbooks">
+					    <label for="rbooks" class="leftLabel">Reading Books</label>
+					</td>
+
+				</tr><br>
+
+				<tr><td colspan="2"><h1>Address</h1></td></tr>
+
+				<tr>
+					<td colspan="2" style="text-align: center;">
+						<textarea name="Address" rows="3" cols="40" maxlength="180" placeholder="Enter your address..."></textarea>
+					</td>
+				</tr><br>
+
+				<tr>
+					<td><label for="file-select">Attach Resume</label></td>
+		    		<td><input type="file" name="Upload" id="file" accept=".pdf, .doc, .jpg"><br></td>
+				</tr><br>
+
+				<tr>	
+	    			<td colspan="2" style="text-align: center;">
+	    				<input type="submit" name="Submit" value="SUBMIT" id="submit">
+	    			</td>
+				</tr>
+
+			</form>
+		</table>
+
+
+	
+		<!-- --------------------------------------------------Internal JavaScript Start------------------------------------------- -->
+		<script type="text/javascript">	//Internal JavaScript
+			var uploadFile = document.getElementById("file");
+
+			uploadFile.onchange = function() {
+			if(this.files[0].size > 2097152){
+			alert("File is too big!");
+			this.value = "";
+			};
+			};
+		</script>
+		<!-- --------------------------------------------------Internal JavaScript End--------------------------------------------- -->
+	</body>
+</html>
